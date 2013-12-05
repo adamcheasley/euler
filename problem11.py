@@ -27,13 +27,52 @@ matrix = [
     ['01', '70', '54', '71', '83', '51', '54', '69', '16', '92', '33', '48', '61', '43', '52', '01', '89', '19', '67', '48'],
 ]
 product = 0
+candidate = 0
+max_x = len(matrix[0]) - 3
+max_y = len(matrix) - 3
 
-for array_index, array in enumerate(matrix):
-    for i, x in enumerate(array):
-        x = int(x)
-        # up
+for y_position, array in enumerate(matrix):
+    for x_position, aa in enumerate(array):
+        aa = int(aa)
+
         # down
+        if y_position < max_y:
+            # create candidate
+            bb = matrix[y_position + 1][x_position]
+            cc = matrix[y_position + 2][x_position]
+            dd = matrix[y_position + 3][x_position]
+            candidate = aa * int(bb) * int(cc) * int(dd)
+            if candidate > product:
+                product = candidate
+
         # left
-        # right
+        if x_position < max_x:
+            # create candidate
+            bb = matrix[y_position][x_position + 1]
+            cc = matrix[y_position][x_position + 2]
+            dd = matrix[y_position][x_position + 3]
+            candidate = aa * int(bb) * int(cc) * int(dd)
+            if candidate > product:
+                product = candidate
+
         # diagonal (down/right)
+        if x_position < max_x and y_position < max_y:
+            # create candidate
+            bb = matrix[y_position + 1][x_position + 1]
+            cc = matrix[y_position + 2][x_position + 2]
+            dd = matrix[y_position + 3][x_position + 3]
+            candidate = aa * int(bb) * int(cc) * int(dd)
+            if candidate > product:
+                product = candidate
+
         # diagonal (down/left)
+        if x_position > 3 and y_position < max_y:
+            # create candidate
+            bb = matrix[y_position + 1][x_position - 1]
+            cc = matrix[y_position + 2][x_position - 2]
+            dd = matrix[y_position + 3][x_position - 3]
+            candidate = aa * int(bb) * int(cc) * int(dd)
+            if candidate > product:
+                product = candidate
+
+print product
