@@ -29,5 +29,5 @@ print 'finding factors'
 for triangle_number in triangle_set:
     found_factors = factors(triangle_number)
     #print len(found_factors)
-    if len(found_factors) == 500:
+    if len(found_factors) >= 500:
         print triangle_number
