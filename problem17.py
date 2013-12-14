@@ -1,13 +1,3 @@
-# If the numbers 1 to 5 are written out in words: one, two, three, four, five, then
-# there are 3 + 3 + 5 + 4 + 4 = 19 letters used in total.
-
-# If all the numbers from 1 to 1000 (one thousand) inclusive were written out in words,
-# how many letters would be used?
-
-# NOTE: Do not count spaces or hyphens. For example, 342 (three hundred and forty-two)
-# contains 23 letters and 115 (one hundred and fifteen) contains 20 letters.
-# The use of "and" when writing out numbers is in compliance with British usage.
-
 units = {1: 'one',
          2: 'two',
          3: 'three',
@@ -39,13 +29,27 @@ letter_count = 0
 
 for i in range(1, 1000):  # 1 to 999
     if len(str(i)) == 1:
-        # unit
-        pass
+        letter_count += len(units[i])
     elif len(str(i)) == 2:
-        # teens or tens
-        pass
+        if str(i)[0] == '1':
+            letter_count += len(teens[i])
+        else:
+            num = str(i)
+            letter_count += len(tens[int(num[0])])  # twenty
+            if num[1] != '0':
+                letter_count += len(units[int(num[1])])  # two
     else:
-        # hundreds. e.g. one hundred and thirty two
-        pass
+        num = str(i)
+        letter_count += len(units[int(num[0])])  # two
+        letter_count += len('hundred')
+        if num[1] != '0' or num[2] != '0':
+            letter_count += len('and')
+        if num[1] != '0' and num[1] != '1':
+            letter_count += len(tens[int(num[1])])  # twenty
+        if num[1] == '1':
+            letter_count += len(teens[int(num[1:])])
+        elif num[2] != '0' and num[1] != '1':
+            letter_count += len(units[int(num[2])])  # two
 
+letter_count += len('onethousand')
 print letter_count
