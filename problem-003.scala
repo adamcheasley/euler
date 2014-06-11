@@ -34,4 +34,3 @@ object Main {
     println(findGreatestPrimeFactor(600851475143L))
   }
 }
-//test
