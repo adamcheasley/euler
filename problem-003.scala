@@ -1,16 +1,24 @@
-// What is the largest prime factor of the number 600851475143 ?
+// What is the largest prime factor of the number 600851475143?
 
 object ProblemTwo {
 
-  def isPrime(i: Long): Boolean = {
-    if (i <= 1L) false
-    else if (i == 2L) true
-    else !(2L to ((i/2)-1L)).exists(x => i % x == 0L)
+  def isPrime(n: Long): Boolean = n == smallestDivisor(n)
+
+  def smallestDivisor(n: Long): Long = findDivisor(n, 2)
+
+  def findDivisor(n: Long, testDivisor: Long): Long = {
+    if (square(testDivisor) > n) n
+    else if (divides(testDivisor, n)) testDivisor
+    else findDivisor(n, testDivisor + 1)
   }
+
+  def square(n: Long): Long = n * n
+
+  def divides(d: Long, n: Long): Boolean = (n % d) == 0
 
   def findGreatestPrimeFactor(i: Long): Long = {
     def rec(x: Long, toTest: Long, factor: Long): Long = {
-      if (toTest == (i/2)) factor
+      if (toTest == (i - 1L)) factor
       else if (i % toTest == 0 && isPrime(toTest))
         rec(x, toTest + 1L, toTest)
       else rec(x, toTest + 1L, factor)
