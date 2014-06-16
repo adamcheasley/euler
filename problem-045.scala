@@ -2,7 +2,11 @@ object ProblemFortyFive {
 
   def hexTest(x: Int): Double = (Math.sqrt((8*x)+1) + 1) / 4
 
-  def isHexNum(x: Int): Boolean = hexTest(x).toInt == hexTest(x)
+  def isHexNum(n: Int): Boolean = hexTest(n).toInt == hexTest(n)
+
+  def pentTest(x: Int): Double = (Math.sqrt(24 * x + 1) + 1) / 6
+
+  def isPentNum(n: Int): Boolean = pentTest(n).toInt == pentTest(n)
 
   def computeTriangeNumbers(computeTo: Int): List[Int] = {
 
