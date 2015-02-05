@@ -26,3 +26,10 @@ if (a + c + f) > out:
 print len(x)
 print len(y)
 print len(z)
+
+
+
+# New solution:
+# produce all possible sets of 4 level arrays
+# only sum if next array index is equal or +1 of current array index
+[(0, b, c, d) for b in range(3) for c in range(4) for d in range(5)]
